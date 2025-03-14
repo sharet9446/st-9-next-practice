@@ -1,20 +1,17 @@
-import { useState } from "react";
+import React from "react";
 
 type Intro = {
-  string: {
-    description1: string;
-    description2: string;
-    description3: string;
-  };
+  description1: string;
+  description2: string;
+  description3: string;
 };
 
-export default async function Home() {
-  const [introData, setIntroData] = useState<T>(null);
-  const res = await fetch("http://localhost:4000/intro", {
+const HomePage = async () => {
+  const response = await fetch("http://localhost:4000/intro", {
     cache: "force-cache",
   });
-  const data = await res.json();
-  console.log(data);
+  const introData: Intro = await response.json();
+
   return (
     <div className="home-container">
       <div className="intro-section">
@@ -34,4 +31,6 @@ export default async function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default HomePage;
