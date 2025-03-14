@@ -1,10 +1,19 @@
 import TodoFrom from "@/components/todoFrom";
+import TodoList from "@/components/todoList";
 import React from "react";
 
-const TodoList = () => {
+export type Todo = {
+  id?: string;
+  title: string;
+  contents: string;
+  isCompleted: boolean;
+  imgPath: string;
+  createdAt: number;
+};
+
+const TodoListPage = () => {
   return (
     <div>
-      {" "}
       <div
         style={{
           display: "flex",
@@ -30,4 +39,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default TodoListPage;

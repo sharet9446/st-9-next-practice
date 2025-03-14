@@ -1,25 +1,16 @@
 "use client";
 
+import { Todo } from "@/app/todolist/page";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
-
-type Todo = {
-  id: string;
-  title: string;
-  contents: string;
-  isCompleted: boolean;
-  imgPath: string;
-  createdAt: number;
-}[];
+import { useState } from "react";
 
 function TodoFrom() {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
 
   const queryClient = useQueryClient();
-
   const addMutation = useMutation({
-    mutationFn: async (newTodo: Todo): Promise<void> => {
+    mutationFn: async (newTodo: Todo) => {
       const response = await fetch("http://localhost:4000/todos", {
         method: "POST",
         headers: {
@@ -30,15 +21,14 @@ function TodoFrom() {
       if (!response.ok) {
         throw new Error(`Failed to post todo`);
       }
-      const data: Todo = await response.json();
-      return data;
+      return await response.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
-  const handleAddTodo = async (e: Event) => {
+  const handleAddTodo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTitle("");
     setContents("");
@@ -47,7 +37,7 @@ function TodoFrom() {
       title,
       contents,
       isCompleted: false,
-      imgPath: "https://picsum.photos/250/250",
+      imgPath: "https://picsum.photos/50/50",
       createdAt: Date.now(),
     });
   };

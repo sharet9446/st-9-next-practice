@@ -49,15 +49,13 @@ export default function RootLayout({
               </Link>
             </li>
             <li className="nav-item">
-              <ContainerDataProvider>
-                <Link href="/todolist" className="nav-link">
-                  TodoList(CSR)
-                </Link>
-              </ContainerDataProvider>
+              <Link href="/todolist" className="nav-link">
+                TodoList(CSR)
+              </Link>
             </li>
           </ul>
         </nav>
-        {children}
+        <ContainerDataProvider>{children}</ContainerDataProvider>
       </body>
     </html>
   );
